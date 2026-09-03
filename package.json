@@ -10,7 +10,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "cli": "node cli.js",
-    "test": "cross-env TESTING=true node --test --test-concurrency=1 tests/api_ch3.test.js",
+    "test": "cross-env TESTING=true node --test --test-concurrency=1",
     "start:test": "cross-env TESTING=true node index.js",
     "migration:down": "node utils/rollback.js"
   },

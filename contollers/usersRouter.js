@@ -34,4 +34,33 @@ usersRouter.put('/:username', async (req, res) => {
     return res.json(user)
 })
 
+usersRouter.get('/:id', async (req, res) => {
+    const readingListWhere = {};
+    if (req.query.read !== undefined) {
+        readingListWhere.read = req.query.read === 'true';
+    }
+
+    const user = await User.findByPk(req.params.id, {
+        attributes: ['name', 'username'],
+        include: [
+            {
+                model: Blog,
+                as: 'readings',
+                attributes: {exclude: ['createdAt', 'updatedAt', 'userId']},
+                through: {
+                    attributes: ['read', 'id'],
+                    as: 'reading_list', // rename modelName to ex-22 json response
+                    where: readingListWhere
+                },
+            },
+        ]
+    })
+
+    if (user) {
+        res.json(user)
+    } else {
+        res.status(404).end()
+    }
+})
+
 module.exports = usersRouter;

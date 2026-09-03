@@ -5,7 +5,9 @@ const app = express();
 const blogsRouter = require('./contollers/blogsRouter');
 const usersRouter = require('./contollers/usersRouter');
 const loginRouter = require('./contollers/login');
+const logoutRouter = require('./contollers/logoutRouter');
 const authorsRouter = require('./contollers/authorsRouter');
+const readinglistRouter = require('./contollers/readingListRouter');
 const testingRouter = require('./contollers/testingRouter');
 
 app.use(express.json());
@@ -17,7 +19,9 @@ app.get('/', (_req, res) => {
 app.use('/api/blogs', blogsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/logout', logoutRouter);
 app.use('/api/authors', authorsRouter);
+app.use('/api/readinglists', readinglistRouter);
 app.use('/api', testingRouter);
 
 app.use(middleware.errorHandler);
